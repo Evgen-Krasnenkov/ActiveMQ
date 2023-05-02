@@ -1,0 +1,32 @@
+logging:
+  level:
+    root: info
+
+server:
+  port: 9090
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS employee;
+#    ;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS employee;
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+
+  jms:
+    pub-sub-domain: true
+
+activemq:
+  broker-url: tcp://localhost:61616
+
+
+emp:
+  jms:
+    topic: EmpTopic

@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  camp-mysql:
+    image: mysql:8.0
+    container_name: camp-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    ports:
+      - "3307:3306"
+  activemq:
+    image: rmohr/activemq
+    ports:
+      - "61616:61616"
+      - "8161:8161"
+
+  application:
+    build: '.'
+    depends_on:
+      - camp-mysql
+      - activemq
+    ports:
+      - "9090:9090"
+    environment:
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      ACTIVEMQ_BROKER_URL: ${ACTIVEMQ_BROKER_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: ${SPRING_DATASOURCE_DRIVER_CLASS_NAME}

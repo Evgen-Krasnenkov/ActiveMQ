@@ -1,0 +1,48 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.7.10'
+    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+}
+
+group 'org.epam'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.google.guava:guava:31.1-jre'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-activemq'
+    implementation 'org.apache.activemq:activemq-broker:5.17.4'
+
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    runtimeOnly 'com.h2database:h2:1.4.200'
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.33'
+
+    testImplementation group: 'org.testcontainers', name: 'junit-jupiter', version: "${testcontainersVersion}"
+    testImplementation group: 'org.testcontainers', name: 'mysql', version: "${testcontainersVersion}"
+    testImplementation group: 'io.rest-assured', name: 'spring-mock-mvc', version: "${restAssuredVersion}"
+    implementation group: 'org.testcontainers', name: 'testcontainers-bom', version: "${testcontainersBomVersion}", ext: 'pom'
+    testImplementation group: 'org.apache.activemq.tooling', name: 'activemq-junit', version: '5.16.1'
+
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.8.1'
+    testImplementation group: 'org.awaitility', name: 'awaitility', version: '4.2.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+}
+
+test {
+    useJUnitPlatform()
+}
